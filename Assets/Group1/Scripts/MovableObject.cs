@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class MovableObject : MonoBehaviour
 {
     [SerializeField] private int _movementRadius = 4;

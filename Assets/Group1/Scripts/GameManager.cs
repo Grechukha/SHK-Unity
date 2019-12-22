@@ -2,8 +2,6 @@
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager controller;
-
     [SerializeField] private GameObject _endGamePanel;
     private GameObject[] _enemyes;
 

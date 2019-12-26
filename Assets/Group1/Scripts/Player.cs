@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _accelerationTime = 2;
     [SerializeField] private float _accelerationCoefficient = 2;
+
     private float _speedDownTime;
     private bool _isAccelerated;
     private Rigidbody2D _rigidbody2D;

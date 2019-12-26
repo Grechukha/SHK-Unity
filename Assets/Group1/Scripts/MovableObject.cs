@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-
 public class MovableObject : MonoBehaviour
 {
     [SerializeField] private int _movementRadius = 4;
     [SerializeField] private float _speed = 4;
+
     private Vector2 _targetPosition;
     private Rigidbody2D _rigidbody2D;
  

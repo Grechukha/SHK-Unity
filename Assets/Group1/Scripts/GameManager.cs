@@ -3,6 +3,7 @@
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _endGamePanel;
+
     private GameObject[] _enemyes;
 
     private void Update()

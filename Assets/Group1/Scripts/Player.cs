@@ -25,11 +25,11 @@ public class Player : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.GetComponent<Enemy>())
         {
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("Accelerator"))
+        else if (collision.gameObject.GetComponent<Accelerator>())
         {
             SpeedUp();
             Destroy(collision.gameObject);

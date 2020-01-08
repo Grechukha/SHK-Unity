@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 565873153562493737}
   - component: {fileID: 565873153562493742}
   - component: {fileID: 565873153562493743}
+  - component: {fileID: 196227707713543517}
   - component: {fileID: 4595646715863096369}
   - component: {fileID: 1510489563563044383}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +98,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementRadius: 4
   _speed: 4
+--- !u!114 &196227707713543517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565873153562493741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e2115e08d64f240a2cf7a3c8d05929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &4595646715863096369
 Rigidbody2D:
   serializedVersion: 4

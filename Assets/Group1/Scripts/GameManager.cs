@@ -4,11 +4,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _endGamePanel;
 
-    private GameObject[] _enemyes;
+    private Enemy[] _enemyes;
 
     private void Update()
     {
-        _enemyes = GameObject.FindGameObjectsWithTag("Enemy");
+        _enemyes = GameObject.FindObjectsOfType<Enemy>();
 
         if (_enemyes.Length == 0)
         {

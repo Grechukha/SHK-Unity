@@ -1,23 +1,39 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _endGamePanel;
+    public UnityEvent GameEnding;
+
+    [SerializeField] private EndGamePanel _endGamePanel;
 
     private Enemy[] _enemyes;
 
-    private void Update()
+    private void Start()
     {
         _enemyes = GameObject.FindObjectsOfType<Enemy>();
+    }
 
-        if (_enemyes.Length == 0)
+    private void Update()
+    {
+        if (IsAnyEnemyAlife() == false)
         {
-            EndGame();
+            GameEnding.Invoke();
         }
     }
 
-    public void EndGame()
+    private bool IsAnyEnemyAlife()
     {
-        _endGamePanel.SetActive(true);
+        bool isAnyEnemyAlife = false;
+
+        for (int i = 0; i < _enemyes.Length; i++)
+        {
+            if (_enemyes[i] != null)
+            {
+                isAnyEnemyAlife = true;
+            }
+        }
+
+        return isAnyEnemyAlife;
     }
 }

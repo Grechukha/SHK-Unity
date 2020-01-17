@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private float _speedDownTime;
     private bool _isAccelerated;
-    private float _horizontalSpeed;
-    private float _verticalSpeed;
 
     private void Start()
     {
@@ -20,6 +18,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        CheckTimer();
         Move();
     }
     
@@ -38,30 +37,40 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
+        _rigidbody2D.velocity = GetCurrentSpeed();
+    }
+
+    private Vector2 GetCurrentSpeed()
+    {
+        float _horizontalSpeed = Input.GetAxisRaw("Horizontal") * _speed * Time.deltaTime;
+        float _verticalSpeed = Input.GetAxisRaw("Vertical") * _speed * Time.deltaTime;
+
+        return new Vector2(_horizontalSpeed, _verticalSpeed);
+    }
+
+    private void CheckTimer()
+    {
         if (_isAccelerated)
         {
             _speedDownTime -= Time.deltaTime;
 
             if (_speedDownTime < 0)
             {
-                _isAccelerated = false;
-                _speed /= _accelerationCoefficient;
+                SpeedDown();
             }
         }
-
-        _horizontalSpeed = Input.GetAxisRaw("Horizontal") * _speed * Time.deltaTime;
-        _verticalSpeed = Input.GetAxisRaw("Vertical") * _speed * Time.deltaTime;
-
-        _rigidbody2D.velocity = new Vector2(_horizontalSpeed, _verticalSpeed);
     }
 
     private void SpeedUp()
     {
-        if (!_isAccelerated)
-        {
-            _speed *= _accelerationCoefficient;
-            _isAccelerated = true;
-            _speedDownTime = _accelerationTime;
-        }
+        _speed *= _accelerationCoefficient;
+        _isAccelerated = true;
+        _speedDownTime = _accelerationTime;
+    }
+
+    private void SpeedDown()
+    {
+        _isAccelerated = false;
+        _speed /= _accelerationCoefficient;
     }
 }

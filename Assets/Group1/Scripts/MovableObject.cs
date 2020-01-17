@@ -17,10 +17,10 @@ public class MovableObject : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        MoveToTarget();
     }
 
-    private void Move()
+    private void MoveToTarget()
     {
         _rigidbody2D.position = Vector2.MoveTowards(_rigidbody2D.position, _targetPosition, _speed * Time.deltaTime);
 

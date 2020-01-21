@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class EnemyList : MonoBehaviour
 {
-    private List<Enemy> _enemies = new List<Enemy>();
+    [SerializeField] private List<Enemy> _enemies = new List<Enemy>();
 
     private UnityEvent _enemiesDied = new UnityEvent();
 
@@ -16,9 +16,9 @@ public class EnemyList : MonoBehaviour
 
     private void Awake()
     {
-        foreach (var enemy in GameObject.FindObjectsOfType<Enemy>())
+        foreach (var enemy in _enemies)
         {
-            AddEnemy(enemy);
+            enemy.Dead += OnEnemyDead;
         }
     }
 

@@ -8,12 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float _accelerationCoefficient = 2;
 
     private Rigidbody2D _rigidbody2D;
+    private float _originalSpeed;
     private float _speedDownTime;
     private bool _isAccelerated;
 
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _originalSpeed = _speed;
     }
 
     private void Update()
@@ -71,6 +73,6 @@ public class Player : MonoBehaviour
     private void SpeedDown()
     {
         _isAccelerated = false;
-        _speed /= _accelerationCoefficient;
+        _speed = _originalSpeed;
     }
 }

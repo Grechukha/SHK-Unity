@@ -6,19 +6,21 @@ public class EnemyList : MonoBehaviour
 {
     [SerializeField] private List<Enemy> _enemies = new List<Enemy>();
 
-    private Action _enemiesDied = null;
-
-    public event Action EnemiesDied
-    {
-        add => _enemiesDied += value;
-        remove => _enemiesDied -= value;
-    }
+    public Action EnemiesDied = null;
 
     private void Awake()
     {
         foreach (var enemy in _enemies)
         {
             enemy.Died += OnEnemyDead;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var enemy in _enemies)
+        {
+            enemy.Died -= OnEnemyDead;
         }
     }
 
@@ -35,7 +37,7 @@ public class EnemyList : MonoBehaviour
 
         if (_enemies.Count == 0)
         {
-            _enemiesDied?.Invoke();
+            EnemiesDied?.Invoke();
         }
     }
 

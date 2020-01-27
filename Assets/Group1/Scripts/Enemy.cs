@@ -3,16 +3,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Action<Enemy> _died = null;
-
-    public event Action<Enemy> Died
-    {
-        add => _died += value;
-        remove => _died -= value;
-    }
+    public event Action<Enemy> Died = null;
 
     private void OnDestroy()
     {
-        _died?.Invoke(this);
+        Died?.Invoke(this);
     }
 }

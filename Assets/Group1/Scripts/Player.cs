@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private float _originalSpeed;
     private float _speedDownTime;
-    private bool _isAccelerated;
 
     private void Start()
     {
@@ -52,27 +51,24 @@ public class Player : MonoBehaviour
 
     private void CheckTimer()
     {
-        if (_isAccelerated)
+        if (_speedDownTime <= 0)
+        {
+            SpeedDown();
+        }
+        else
         {
             _speedDownTime -= Time.deltaTime;
-
-            if (_speedDownTime < 0)
-            {
-                SpeedDown();
-            }
         }
     }
 
     private void SpeedUp()
     {
         _speed *= _accelerationCoefficient;
-        _isAccelerated = true;
         _speedDownTime = _accelerationTime;
     }
 
     private void SpeedDown()
     {
-        _isAccelerated = false;
         _speed = _originalSpeed;
     }
 }

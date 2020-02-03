@@ -8,18 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float _accelerationCoefficient = 2;
 
     private Rigidbody2D _rigidbody2D;
-    private float _speedDownTime;
-    private float _originalSpeed;
 
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _originalSpeed = _speed;
     }
 
     private void Update()
     {
-        CheckTimer();
         Move();
     }
     
@@ -48,27 +44,16 @@ public class Player : MonoBehaviour
 
         return new Vector2(_horizontalSpeed, _verticalSpeed);
     }
-
-    private void CheckTimer()
-    {
-        if (_speedDownTime <= 0)
-        {
-            SpeedDown();
-        }
-        else
-        {
-            _speedDownTime -= Time.deltaTime;
-        }
-    }
-
+    
     private void SpeedUp()
     {
         _speed *= _accelerationCoefficient;
-        _speedDownTime = _accelerationTime;
+
+        Invoke("SpeedDown", _accelerationTime);
     }
 
     private void SpeedDown()
     {
-        _speed = _originalSpeed;
+        _speed /= _accelerationCoefficient;
     }
 }

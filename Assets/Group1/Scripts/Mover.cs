@@ -12,7 +12,7 @@ public class Mover : MonoBehaviour
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _targetPosition = GetNewTargetPosition();
+        _targetPosition = GetRandomPosition();
     }
 
     private void Update()
@@ -26,11 +26,11 @@ public class Mover : MonoBehaviour
 
         if (_rigidbody2D.position == _targetPosition)
         {
-            _targetPosition = GetNewTargetPosition();
+            _targetPosition = GetRandomPosition();
         }
     }
 
-    private Vector3 GetNewTargetPosition()
+    private Vector3 GetRandomPosition()
     {
         return Random.insideUnitCircle * _movementRadius;
     }

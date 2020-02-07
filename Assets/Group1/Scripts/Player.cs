@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -39,21 +40,26 @@ public class Player : MonoBehaviour
 
     private Vector2 GetCurrentSpeed()
     {
-        float _horizontalSpeed = Input.GetAxisRaw("Horizontal") * _speed * Time.deltaTime;
-        float _verticalSpeed = Input.GetAxisRaw("Vertical") * _speed * Time.deltaTime;
-
-        return new Vector2(_horizontalSpeed, _verticalSpeed);
+        return new Vector2(GetAxisSpeed("Horizontal"), GetAxisSpeed("Vertical"));
     }
-    
+
+    private float GetAxisSpeed(string axisName)
+    {
+        return Input.GetAxisRaw(axisName) * _speed * Time.deltaTime;
+    }
+
+
     private void SpeedUp()
     {
         _speed *= _accelerationCoefficient;
 
-        Invoke("SpeedDown", _accelerationTime);
+        StartCoroutine(SpeedDown());
     }
 
-    private void SpeedDown()
+    private IEnumerator SpeedDown()
     {
+        yield return new WaitForSeconds(_accelerationTime);
+
         _speed /= _accelerationCoefficient;
     }
 }

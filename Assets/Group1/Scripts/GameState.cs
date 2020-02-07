@@ -7,11 +7,16 @@ public class GameState : MonoBehaviour
 
     private EnemyList _enemies;
 
-    private void Awake()
+    private void OnEnable()
     {
         _enemies = GetComponent<EnemyList>();
  
-        _enemies.EnemiesDied += () => OnEnemiesDied();
+        _enemies.EnemiesDied += OnEnemiesDied;
+    }
+
+    private void OnDisable()
+    {
+        _enemies.EnemiesDied -= OnEnemiesDied;
     }
 
     public void OnEnemiesDied()

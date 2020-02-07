@@ -6,33 +6,33 @@ public class EnemyList : MonoBehaviour
 {
     [SerializeField] private List<Enemy> _enemies = new List<Enemy>();
 
-    public Action EnemiesDied = null;
+    public event Action EnemiesDied;
 
-    private void Awake()
+    private void OnEnable()
     {
         foreach (var enemy in _enemies)
         {
-            enemy.Died += OnEnemyDead;
+            enemy.Died += OnEnemyDied;
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         foreach (var enemy in _enemies)
         {
-            enemy.Died -= OnEnemyDead;
+            enemy.Died -= OnEnemyDied;
         }
     }
 
     public void AddEnemy(Enemy enemy)
     {
         _enemies.Add(enemy);
-        enemy.Died += OnEnemyDead;
+        enemy.Died += OnEnemyDied;
     }
 
     public void RemoveEnemy(Enemy enemy)
     {
-        enemy.Died -= OnEnemyDead;
+        enemy.Died -= OnEnemyDied;
         _enemies.Remove(enemy);
 
         if (_enemies.Count == 0)
@@ -41,7 +41,7 @@ public class EnemyList : MonoBehaviour
         }
     }
 
-    private void OnEnemyDead(Enemy enemy)
+    private void OnEnemyDied(Enemy enemy)
     {
         RemoveEnemy(enemy);
     }
